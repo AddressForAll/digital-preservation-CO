@@ -5,6 +5,7 @@
 - El país está dividido en **32 departamentos**, administrados por un gobernador electo, y el Distrito Capital (distrito de la ciudad de Bogotá).
 - Los departamentos se subdividen en **1120 municipios**, incluida Bogotá, que son gobernados por un alcalde y un concejo electos. Los datos que nos interesan están a este nivel.
 - Bogotá es tanto la ciudad del distrito capital como la capital del departamento de Cundinamarca.
+- La **instancia legal** que asigna nombres a las carreteras son los municipios.
 
 # Licencia
 [Licencia CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.es).
