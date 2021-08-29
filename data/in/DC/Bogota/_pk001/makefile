@@ -57,7 +57,7 @@ all_layers: via genericvia block geoaddress
 ## Make targets of the Project Digital Preservation
 
 ## ## ## ## sponsored by Project AddressForAll
-geoaddress: layername = geoaddress_none
+geoaddress: layername = geoaddress_full
 geoaddress: tabname = pk$(fullPkID)_p4_geoaddress
 geoaddress: makedirs $(part4_path)
 	@# pk1_p4 - ETL extrating to PostgreSQL/PostGIS the "geoaddress" datatype (point with house_number but no via name)
@@ -90,7 +90,7 @@ ifeq ('shp2sql','csv2sql')
 	@echo Executando csc2sql ...
 	psql $(pg_uri_db) -c "SELECT ingest.fdw_generate_direct_csv( '$(sandbox)/pdom_shp/pdom.csv', '$(tabname)' )"
 endif
-	psql $(pg_uri_db) -c "SELECT ingest.any_load('shp2sql','$(sandbox)/pdom_shp/pdom','$(layername)','$(tabname)','$(fullPkID)','$(part4_file)',array['gid', 'PDOTEXTO AS house_number', 'PDOCINTERI', 'PDONVIAL', 'PDOCLOTE', 'PDOTIPO', 'geom'])"
+	psql $(pg_uri_db) -c "SELECT ingest.any_load('shp2sql','$(sandbox)/pdom_shp/pdom','$(layername)','$(tabname)','$(fullPkID)','$(part4_file)',array['gid', 'PDOTEXTO AS house_number', 'PDOCINTERI', 'PDONVIAL AS via_name', 'PDOTIPO', 'geom'])"
 	@echo "Confira os resultados nas tabelas ingest.layer_file e ingest.feature_asis".
 ifeq ('shp2sql','csv2sql')
 	psql $(pg_uri_db) -c "DROP FOREIGN TABLE IF EXISTS $(tabname)"
@@ -189,7 +189,7 @@ ifeq ('shp2sql','csv2sql')
 	@echo Executando csc2sql ...
 	psql $(pg_uri_db) -c "SELECT ingest.fdw_generate_direct_csv( '$(sandbox)/manz_shp/manz.csv', '$(tabname)' )"
 endif
-	psql $(pg_uri_db) -c "SELECT ingest.any_load('shp2sql','$(sandbox)/manz_shp/manz','$(layername)','$(tabname)','$(fullPkID)','$(part3_file)',array['gid', 'MANCODIGO', 'SECCODIGO', 'geom'])"
+	psql $(pg_uri_db) -c "SELECT ingest.any_load('shp2sql','$(sandbox)/manz_shp/manz','$(layername)','$(tabname)','$(fullPkID)','$(part3_file)',array['gid', 'geom'])"
 	@echo "Confira os resultados nas tabelas ingest.layer_file e ingest.feature_asis".
 ifeq ('shp2sql','csv2sql')
 	psql $(pg_uri_db) -c "DROP FOREIGN TABLE IF EXISTS $(tabname)"
@@ -237,7 +237,7 @@ ifeq ('shp2sql','csv2sql')
 	@echo Executando csc2sql ...
 	psql $(pg_uri_db) -c "SELECT ingest.fdw_generate_direct_csv( '$(sandbox)/lote_shp/lote.csv', '$(tabname)' )"
 endif
-	psql $(pg_uri_db) -c "SELECT ingest.any_load('shp2sql','$(sandbox)/lote_shp/lote','$(layername)','$(tabname)','$(fullPkID)','$(part2_file)',array['gid', 'LOTCODIGO', 'MANZCODIGO', 'LOTDISTRIT', 'geom'])"
+	psql $(pg_uri_db) -c "SELECT ingest.any_load('shp2sql','$(sandbox)/lote_shp/lote','$(layername)','$(tabname)','$(fullPkID)','$(part2_file)',array['gid', 'geom'])"
 	@echo "Confira os resultados nas tabelas ingest.layer_file e ingest.feature_asis".
 ifeq ('shp2sql','csv2sql')
 	psql $(pg_uri_db) -c "DROP FOREIGN TABLE IF EXISTS $(tabname)"

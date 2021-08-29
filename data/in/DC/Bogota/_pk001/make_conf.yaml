@@ -52,5 +52,5 @@ layers:
     method: shp2sql
     p: 4a
     file: 4
-    sql_select: ['gid', 'PDOTEXTO AS house_number', 'PDOCINTERI', 'PDONVIAL', 'PDOTIPO', 'geom']
+    sql_select: ['gid', 'PDOTEXTO AS house_number', 'PDOCINTERI', 'PDONVIAL AS via_name', 'PDOTIPO', 'geom']
     orig_filename: pdom_shp/pdom
